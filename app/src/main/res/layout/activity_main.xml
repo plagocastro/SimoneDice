@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteY="40dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/rojo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#BA0B0B"
@@ -27,7 +27,7 @@
         tools:layout_editor_absoluteY="173dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/azul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#00BCD4"
@@ -38,7 +38,7 @@
         tools:layout_editor_absoluteY="281dp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/amarillo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#CAB81A"
@@ -48,7 +48,7 @@
         tools:layout_editor_absoluteY="281dp" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/verde"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#10C617"
@@ -59,7 +59,7 @@
         tools:layout_editor_absoluteY="173dp" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/inicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="INICIO"
@@ -68,11 +68,20 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/ronda"
         android:layout_width="63dp"
         android:layout_height="53dp"
         android:text="RONDA"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="345dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/mensajePartida"
+        android:layout_width="316dp"
+        android:layout_height="37dp"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="669dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
