@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">mariaSimoneDice</string>
+    <string name="texto_ronda">RONDA:</string>
 </resources>
