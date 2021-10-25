@@ -15,7 +15,8 @@ import java.nio.channels.spi.AbstractSelectionKey
 
 
 
-class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
+class MainActivity : AppCompatActivity() {
+    var contadorRonda:Int =0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -66,8 +67,9 @@ class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
 
     suspend fun ejecutarSecuencia(){
 
+        var sec = arrayListOf<String>("","","","")
+        for(i in 0..3){
 
-        for(i in 1..4){
 
             suspend fun azul1(){
                 val botonAzul:Button = findViewById(R.id.azul)
@@ -75,6 +77,8 @@ class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
                 delay(500L)
                 botonAzul.setBackgroundColor(Color.parseColor("#00BCD4"))
                 delay(500L)
+                sec.set(i,"azul")
+
             }
             suspend fun rojo1(){
                 val botonRojo:Button = findViewById(R.id.rojo)
@@ -82,6 +86,7 @@ class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
                 delay(500L)
                 botonRojo.setBackgroundColor(Color.parseColor("#BA0B0B"))
                 delay(500L)
+                sec.set(i,"rojo")
             }
             suspend fun amarillo1(){
                 val botonAmarillo:Button = findViewById(R.id.amarillo)
@@ -89,6 +94,7 @@ class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
                 delay(500L)
                 botonAmarillo.setBackgroundColor(Color.parseColor("#CAB81A"))
                 delay(500L)
+                sec.set(i,"amarillo")
             }
             suspend fun verde1(){
                 val botonVerde:Button = findViewById(R.id.verde)
@@ -96,6 +102,7 @@ class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
                 delay(500L)
                 botonVerde.setBackgroundColor(Color.parseColor("#10C617"))
                 delay(500L)
+                sec.set(i,"verde")
             }
             val cadena = listOf(1,2,3,4)
             val colores = cadena.shuffled().last()
@@ -109,6 +116,7 @@ class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
         val texto:TextView = findViewById(R.id.mensajePartida)
         texto.isVisible
         texto.setText("TU TURNO!!!!!!!!")
+
 
     }
     private fun mensajeusuario(key:Int){
@@ -125,5 +133,4 @@ class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
 /*
 OPCIONES::
 
-var sec:Array<int> = ArrayOf()
  */
