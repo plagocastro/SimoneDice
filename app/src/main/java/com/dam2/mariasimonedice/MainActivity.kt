@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -105,6 +106,10 @@ class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
                 else -> azul1()
             }
         }
+        val texto:TextView = findViewById(R.id.mensajePartida)
+        texto.isVisible
+        texto.setText("TU TURNO!!!!!!!!")
+
     }
     private fun mensajeusuario(key:Int){
 
@@ -118,8 +123,7 @@ class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
     }
 
 /*
+OPCIONES::
 
-    }
-
-
+var sec:Array<int> = ArrayOf()
  */
