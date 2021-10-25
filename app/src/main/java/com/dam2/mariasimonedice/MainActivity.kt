@@ -3,9 +3,12 @@ package com.dam2.mariasimonedice
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.View.GONE
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -17,9 +20,20 @@ import java.nio.channels.spi.AbstractSelectionKey
 
 class MainActivity : AppCompatActivity() {
     var contadorRonda:Int =0
+    var sec = arrayListOf<String>("","","","")
+    var comprobacion = arrayListOf<String>("","","","")
+    var posicion:Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val texto2:TextView = findViewById(R.id.mensajePartida)
+        texto2.setText("")
+
+        val botonCom:Button = findViewById(R.id.comprobar)
+        botonCom.setVisibility(View.GONE)
+
 
         val botonInicio:Button = findViewById(R.id.inicio)
         botonInicio.setOnClickListener(){
@@ -62,6 +76,8 @@ class MainActivity : AppCompatActivity() {
         contadorRonda = contadorRonda + 1
         val textoRonda:TextView = findViewById(R.id.texto_ronda)
         textoRonda.setText("RONDA:"+"  "+contadorRonda.toString())
+        val botonCom:Button = findViewById(R.id.comprobar)
+        botonCom.setVisibility(View.GONE)
         }
 
 
@@ -116,10 +132,71 @@ class MainActivity : AppCompatActivity() {
         val texto:TextView = findViewById(R.id.mensajePartida)
         texto.isVisible
         texto.setText("TU TURNO!!!!!!!!")
+        val botonCom:Button = findViewById(R.id.comprobar)
+        botonCom.setVisibility(View.VISIBLE)
 
 
     }
-    private fun mensajeusuario(key:Int){
+    private fun tuTurno(){
+        val texto:TextView = findViewById(R.id.mensajePartida)
+        if(texto.text=="TU TURNO!!!!!!!!"){
+        val botonRojo:Button = findViewById(R.id.rojo)
+        botonRojo.setOnClickListener(){
+            Toast.makeText(applicationContext,"Rojo", Toast.LENGTH_SHORT).show()
+            comprobacion.set(posicion,"rojo")
+            posicion = posicion + 1
+        }
+        val botonVerde:Button = findViewById(R.id.verde)
+        botonVerde.setOnClickListener(){
+            Toast.makeText(applicationContext,"Verde", Toast.LENGTH_SHORT).show()
+            comprobacion.set(posicion,"verde")
+            posicion = posicion + 1
+        }
+        val botonAzul:Button = findViewById(R.id.azul)
+        botonAzul.setOnClickListener(){
+            Toast.makeText(applicationContext,"Azul", Toast.LENGTH_SHORT).show()
+            comprobacion.set(posicion,"azul")
+            posicion = posicion + 1
+        }
+        val botonAmarillo:Button = findViewById(R.id.amarillo)
+        botonAmarillo.setOnClickListener(){
+            Toast.makeText(applicationContext,"Amarilolo", Toast.LENGTH_SHORT).show()
+            comprobacion.set(posicion,"amarillo")
+            posicion = posicion + 1
+        }
+        }
+    }
+    suspend fun compruebo(){
+        val botonCom:Button = findViewById(R.id.comprobar)
+        val texto2:TextView = findViewById(R.id.mensajePartida)
+
+        if(comprobacion[0]==sec[0]){
+            if (comprobacion[1]==sec[1]){
+                if (comprobacion[1]==sec[1]){
+                    if (comprobacion[1]==sec[1]){
+                        texto2.setText("GANASTE!!!!!!!!!!!!!")
+                        delay(1500L)
+                        texto2.setText("")
+                    }
+                    else{
+                        texto2.setText("GAME OVER :(")
+
+                    }
+                }
+                else{
+                    texto2.setText("GAME OVER :(")
+
+                }
+            }
+            else{
+                texto2.setText("GAME OVER :(")
+
+            }
+        }
+        else{
+            texto2.setText("GAME OVER :(")
+
+        }
 
     }
     private fun reinicio(){
@@ -127,6 +204,13 @@ class MainActivity : AppCompatActivity() {
         textoRonda.setText("RONDA:")
         val botonInicio:Button = findViewById(R.id.inicio)
         botonInicio.setText("INICIO")
+        posicion = 0
+        val texto:TextView = findViewById(R.id.mensajePartida)
+        texto.setText("")
+        val botonCom:Button = findViewById(R.id.comprobar)
+        botonCom.setVisibility(View.GONE)
+        val texto2:TextView = findViewById(R.id.mensajePartida)
+        texto2.setText("")
     }
     }
 
