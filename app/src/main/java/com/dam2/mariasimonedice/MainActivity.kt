@@ -1,10 +1,15 @@
 package com.dam2.mariasimonedice
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.nio.channels.spi.AbstractSelectionKey
 
 
@@ -45,23 +50,62 @@ class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
             reinicio()
         }
     }
-    private fun empezarJuego(){
+    private fun empezarJuego() {
         mostrarRonda()
-        ejecutarSecuencia()
+        val secuencia = GlobalScope.launch(Dispatchers.Main) {
+            ejecutarSecuencia()
+        }
     }
     private fun mostrarRonda(){
         contadorRonda = contadorRonda + 1
         val textoRonda:TextView = findViewById(R.id.texto_ronda)
         textoRonda.setText("RONDA:"+"  "+contadorRonda.toString())
         }
-    private fun ejecutarSecuencia(){
-        val azul = Toast.makeText(applicationContext,"Azul", Toast.LENGTH_SHORT).show()
-        val verde = Toast.makeText(applicationContext,"Verde", Toast.LENGTH_SHORT).show()
-        val amarillo = Toast.makeText(applicationContext,"Amarilolo", Toast.LENGTH_SHORT).show()
-        val rojo = Toast.makeText(applicationContext,"Rojo", Toast.LENGTH_SHORT).show()
-        val cadena = listOf(azul,verde,rojo,amarillo)
-        val colores = cadena.shuffled()
+
+
+    suspend fun ejecutarSecuencia(){
+
+
+        for(i in 1..4){
+
+            suspend fun azul1(){
+                val botonAzul:Button = findViewById(R.id.azul)
+                botonAzul.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                delay(500L)
+                botonAzul.setBackgroundColor(Color.parseColor("#00BCD4"))
+                delay(500L)
+            }
+            suspend fun rojo1(){
+                val botonRojo:Button = findViewById(R.id.rojo)
+                botonRojo.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                delay(500L)
+                botonRojo.setBackgroundColor(Color.parseColor("#BA0B0B"))
+                delay(500L)
+            }
+            suspend fun amarillo1(){
+                val botonAmarillo:Button = findViewById(R.id.amarillo)
+                botonAmarillo.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                delay(500L)
+                botonAmarillo.setBackgroundColor(Color.parseColor("#CAB81A"))
+                delay(500L)
+            }
+            suspend fun verde1(){
+                val botonVerde:Button = findViewById(R.id.verde)
+                botonVerde.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                delay(500L)
+                botonVerde.setBackgroundColor(Color.parseColor("#10C617"))
+                delay(500L)
+            }
+            val cadena = listOf(1,2,3,4)
+            val colores = cadena.shuffled().last()
+            val dR = when (colores) {
+                1 -> amarillo1()
+                2 -> verde1()
+                3 -> rojo1()
+                else -> azul1()
+            }
         }
+    }
     private fun mensajeusuario(key:Int){
 
     }
@@ -73,3 +117,9 @@ class MainActivity : AppCompatActivity() {var contadorRonda:Int =0
     }
     }
 
+/*
+
+    }
+
+
+ */
