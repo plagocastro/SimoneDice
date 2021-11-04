@@ -16,6 +16,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.Boolean.FALSE
+import java.lang.Boolean.TRUE
 import java.nio.channels.spi.AbstractSelectionKey
 
 
@@ -94,19 +96,27 @@ class MainActivity : AppCompatActivity() {
 
 
     suspend fun ejecutarSecuencia() {
-
+        val botonAzul: Button = findViewById(R.id.azul)
+        val botonRojo: Button = findViewById(R.id.rojo)
+        val botonAmarillo: Button = findViewById(R.id.amarillo)
+        val botonVerde: Button = findViewById(R.id.verde)
+        botonAzul.setClickable(FALSE)
+        botonVerde.setClickable(FALSE)
+        botonAmarillo.setClickable(FALSE)
+        botonRojo.setClickable(FALSE)
         for (i in 1..contadorRonda) {
             suspend fun azul1() {
-                val botonAzul: Button = findViewById(R.id.azul)
+
                 botonAzul.setBackgroundColor(Color.parseColor("#18C4DA"))
                 delay(500L)
                 botonAzul.setBackgroundColor(Color.parseColor("#06525C"))
                 delay(500L)
                 sec.add("azul")
 
+
             }
             suspend fun rojo1() {
-                val botonRojo: Button = findViewById(R.id.rojo)
+
                 botonRojo.setBackgroundColor(Color.parseColor("#BA0B0B"))
                 delay(500L)
                 botonRojo.setBackgroundColor(Color.parseColor("#630404"))
@@ -115,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             suspend fun amarillo1() {
-                val botonAmarillo: Button = findViewById(R.id.amarillo)
+
                 botonAmarillo.setBackgroundColor(Color.parseColor("#FDE403"))
                 delay(500L)
                 botonAmarillo.setBackgroundColor(Color.parseColor("#A19206"))
@@ -124,7 +134,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             suspend fun verde1() {
-                val botonVerde: Button = findViewById(R.id.verde)
+
                 botonVerde.setBackgroundColor(Color.parseColor("#0CDC14"))
                 delay(500L)
                 botonVerde.setBackgroundColor(Color.parseColor("#046A07"))
@@ -139,12 +149,18 @@ class MainActivity : AppCompatActivity() {
                 2 -> verde1()
                 3 -> rojo1()
                 else -> azul1()
+
             }
+
         }
+        delay(500L)
         Toast.makeText(applicationContext, "TU TURNO", Toast.LENGTH_SHORT).show()
         val botonCom: Button = findViewById(R.id.comprobar)
         botonCom.setVisibility(View.VISIBLE)
-
+        botonAzul.setClickable(TRUE)
+        botonVerde.setClickable(TRUE)
+        botonAmarillo.setClickable(TRUE)
+        botonRojo.setClickable(TRUE)
 
     }
 
