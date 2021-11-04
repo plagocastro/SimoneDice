@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isGone
@@ -19,9 +21,9 @@ import java.nio.channels.spi.AbstractSelectionKey
 
 class MainActivity : AppCompatActivity() {
     var contadorRonda: Int = 0
-    var sec = arrayListOf<String>("", "", "", "")
-    var comprobacion = arrayListOf<String>("", "", "", "")
-    var posicion: Int = 0
+    var sec = arrayListOf<String>()
+    var comprobacion = arrayListOf<String>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         val botonCom: Button = findViewById(R.id.comprobar)
         botonCom.setVisibility(View.GONE)
 
+        val premio: ImageView = findViewById(R.id.mono)
+        premio.setVisibility(GONE)
 
         val botonInicio: Button = findViewById(R.id.inicio)
         botonInicio.setOnClickListener() {
@@ -37,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "COMIENZA", Toast.LENGTH_SHORT).show()
             botonInicio.setText("NUEVA RONDA")
             empezarJuego()
-
+            botonInicio.setVisibility(GONE)
         }
         val botonRojo: Button = findViewById(R.id.rojo)
         botonRojo.setOnClickListener() {
@@ -73,8 +77,11 @@ class MainActivity : AppCompatActivity() {
         val botonCom: Button = findViewById(R.id.comprobar)
         botonCom.setOnClickListener() {
             compruebo()
-        }
+            botonCom.setVisibility(GONE)
 
+        }
+        sec.clear()
+        comprobacion.clear()
     }
 
     private fun mostrarRonda() {
@@ -87,41 +94,42 @@ class MainActivity : AppCompatActivity() {
 
 
     suspend fun ejecutarSecuencia() {
-        for (i in 0..3) {
+
+        for (i in 1..contadorRonda) {
             suspend fun azul1() {
                 val botonAzul: Button = findViewById(R.id.azul)
-                botonAzul.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                botonAzul.setBackgroundColor(Color.parseColor("#18C4DA"))
                 delay(500L)
-                botonAzul.setBackgroundColor(Color.parseColor("#00BCD4"))
+                botonAzul.setBackgroundColor(Color.parseColor("#06525C"))
                 delay(500L)
-                sec.set(i, "azul")
+                sec.add("azul")
 
             }
             suspend fun rojo1() {
                 val botonRojo: Button = findViewById(R.id.rojo)
-                botonRojo.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-                delay(500L)
                 botonRojo.setBackgroundColor(Color.parseColor("#BA0B0B"))
                 delay(500L)
-                sec.set(i, "rojo")
+                botonRojo.setBackgroundColor(Color.parseColor("#630404"))
+                delay(500L)
+                sec.add("rojo")
             }
 
             suspend fun amarillo1() {
                 val botonAmarillo: Button = findViewById(R.id.amarillo)
-                botonAmarillo.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                botonAmarillo.setBackgroundColor(Color.parseColor("#FDE403"))
                 delay(500L)
-                botonAmarillo.setBackgroundColor(Color.parseColor("#CAB81A"))
+                botonAmarillo.setBackgroundColor(Color.parseColor("#A19206"))
                 delay(500L)
-                sec.set(i, "amarillo")
+                sec.add("amarillo")
             }
 
             suspend fun verde1() {
                 val botonVerde: Button = findViewById(R.id.verde)
-                botonVerde.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                botonVerde.setBackgroundColor(Color.parseColor("#0CDC14"))
                 delay(500L)
-                botonVerde.setBackgroundColor(Color.parseColor("#10C617"))
+                botonVerde.setBackgroundColor(Color.parseColor("#046A07"))
                 delay(500L)
-                sec.set(i, "verde")
+                sec.add("verde")
             }
 
             val cadena = listOf(1, 2, 3, 4)
@@ -133,9 +141,7 @@ class MainActivity : AppCompatActivity() {
                 else -> azul1()
             }
         }
-        val texto: TextView = findViewById(R.id.mensajePartida)
-        texto.isVisible
-        texto.setText("TU TURNO!!!!!!!!")
+        Toast.makeText(applicationContext, "TU TURNO", Toast.LENGTH_SHORT).show()
         val botonCom: Button = findViewById(R.id.comprobar)
         botonCom.setVisibility(View.VISIBLE)
 
@@ -147,30 +153,22 @@ class MainActivity : AppCompatActivity() {
             val botonRojo: Button = findViewById(R.id.rojo)
             botonRojo.setOnClickListener() {
 
-                comprobacion.set(posicion, "rojo")
-                posicion = posicion + 1
+                comprobacion.add("rojo")
             }
             val botonVerde: Button = findViewById(R.id.verde)
             botonVerde.setOnClickListener() {
 
-                comprobacion.set(posicion, "verde")
-                posicion = posicion + 1
+                comprobacion.add("verde")
             }
             val botonAzul: Button = findViewById(R.id.azul)
             botonAzul.setOnClickListener() {
 
-                comprobacion.set(posicion, "azul")
-                posicion = posicion + 1
+                comprobacion.add("azul")
             }
             val botonAmarillo: Button = findViewById(R.id.amarillo)
             botonAmarillo.setOnClickListener() {
 
-                comprobacion.set(posicion, "amarillo")
-                posicion = posicion + 1
-
-        }
-        if(posicion==4){
-            posicion = 0
+                comprobacion.add("amarillo")
         }
     }
 
@@ -179,34 +177,57 @@ class MainActivity : AppCompatActivity() {
 
         if (comprobacion == sec) {
             Toast.makeText(applicationContext, "GANATE WACHOOOOOOOOO", Toast.LENGTH_SHORT).show()
+            if (contadorRonda==5){
+            val premio = GlobalScope.launch(Dispatchers.Main) {
+                premio()
+            }
+            }
+            val botonInicio: Button = findViewById(R.id.inicio)
+            botonInicio.setVisibility(VISIBLE)
         } else {
             Toast.makeText(
                 applicationContext,
-                "DESCANSA AQUI CABALLERO LE VEO CANSADO, INTENTELO LUEGO",
-                Toast.LENGTH_SHORT
-            ).show()
+                "DESCANSA AQUI CABALLERO LE VEO CANSADO, INTENTELO LUEGO",Toast.LENGTH_SHORT).show()
+                 val botonInicio: Button = findViewById(R.id.inicio)
+                botonInicio.setVisibility(View.GONE)
         }
         println(sec)
         println(comprobacion)
-
+    }
+    suspend fun premio() {
+        val botonCom: Button = findViewById(R.id.comprobar)
+        botonCom.setVisibility(View.GONE)
+        val botonRojo: Button = findViewById(R.id.rojo)
+        botonRojo.setVisibility(View.GONE)
+        val botonVerde: Button = findViewById(R.id.verde)
+        botonVerde.setVisibility(View.GONE)
+        val botonAmarillo: Button = findViewById(R.id.amarillo)
+        botonAmarillo.setVisibility(View.GONE)
+        val botonAzul: Button = findViewById(R.id.azul)
+        botonAzul.setVisibility(View.GONE)
+        val premio: ImageView = findViewById(R.id.mono)
+        premio.setVisibility(VISIBLE)
+        delay(8000L)
+        botonAzul.setVisibility(View.VISIBLE)
+        botonAmarillo.setVisibility(View.VISIBLE)
+        botonVerde.setVisibility(View.VISIBLE)
+        botonRojo.setVisibility(View.VISIBLE)
+        botonCom.setVisibility(View.VISIBLE)
+        premio.setVisibility(GONE)
     }
 
     private fun reinicio() {
         val textoRonda: TextView = findViewById(R.id.texto_ronda)
         textoRonda.setText("RONDA:")
         val botonInicio: Button = findViewById(R.id.inicio)
+        botonInicio.setVisibility(VISIBLE)
         botonInicio.setText("INICIO")
-        posicion = 0
         val texto: TextView = findViewById(R.id.mensajePartida)
         texto.setText("")
         val botonCom: Button = findViewById(R.id.comprobar)
         botonCom.setVisibility(View.GONE)
-        for (i in 0..3) {
-            sec.set(i," ")
-        }
-        for (i in 0..3) {
-            comprobacion.set(i," ")
-        }
-        posicion = 0
+        sec.clear()
+        comprobacion.clear()
+        contadorRonda=0
     }
 }

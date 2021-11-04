@@ -42,8 +42,8 @@
         android:id="@+id/rojo"
         android:layout_width="164dp"
         android:layout_height="163dp"
+        android:backgroundTint="#630404"
         android:elevation="-10dp"
-        android:backgroundTint="#BA0B0B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.967"
@@ -55,10 +55,10 @@
 
     <Button
         android:id="@+id/azul"
-        android:elevation="-10dp"
         android:layout_width="166dp"
         android:layout_height="162dp"
-        android:backgroundTint="#00BCD4"
+        android:backgroundTint="#06525C"
+        android:elevation="-10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.073"
@@ -70,10 +70,10 @@
 
     <Button
         android:id="@+id/amarillo"
-        android:elevation="-10dp"
         android:layout_width="168dp"
         android:layout_height="170dp"
-        android:backgroundTint="#CAB81A"
+        android:backgroundTint="#A19206"
+        android:elevation="-10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.065"
@@ -84,10 +84,10 @@
 
     <Button
         android:id="@+id/verde"
-        android:elevation="-10dp"
         android:layout_width="166dp"
         android:layout_height="172dp"
-        android:backgroundTint="#10C617"
+        android:backgroundTint="#046A07"
+        android:elevation="-10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.975"
@@ -149,6 +149,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
+
+    <ImageView
+        android:id="@+id/mono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mono" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
