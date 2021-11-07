@@ -160,5 +160,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/mono" />
 
+    <ImageView
+        android:id="@+id/indice"
+        android:layout_width="545dp"
+        android:layout_height="378dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mono"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/indice" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val pollo:ImageView= findViewById(R.id.indice)
+        pollo.setVisibility(GONE)
+
         val botonCom: Button = findViewById(R.id.comprobar)
         botonCom.setVisibility(View.GONE)
 
@@ -194,10 +197,16 @@ class MainActivity : AppCompatActivity() {
         if (comprobacion == sec) {
             Toast.makeText(applicationContext, "GANATE WACHOOOOOOOOO", Toast.LENGTH_SHORT).show()
             if (contadorRonda==5){
-            val premio = GlobalScope.launch(Dispatchers.Main) {
-                premio()
+                val premios = GlobalScope.launch(Dispatchers.Main) {
+                    premio()
+                    }
             }
+            if (contadorRonda==10){
+                val premios = GlobalScope.launch(Dispatchers.Main) {
+                    premio2()
+                    }
             }
+
             val botonInicio: Button = findViewById(R.id.inicio)
             botonInicio.setVisibility(VISIBLE)
         } else {
@@ -222,6 +231,27 @@ class MainActivity : AppCompatActivity() {
         val botonAzul: Button = findViewById(R.id.azul)
         botonAzul.setVisibility(View.GONE)
         val premio: ImageView = findViewById(R.id.mono)
+        premio.setVisibility(VISIBLE)
+        delay(8000L)
+        botonAzul.setVisibility(View.VISIBLE)
+        botonAmarillo.setVisibility(View.VISIBLE)
+        botonVerde.setVisibility(View.VISIBLE)
+        botonRojo.setVisibility(View.VISIBLE)
+        botonCom.setVisibility(View.VISIBLE)
+        premio.setVisibility(GONE)
+    }
+    suspend fun premio2() {
+        val botonCom: Button = findViewById(R.id.comprobar)
+        botonCom.setVisibility(View.GONE)
+        val botonRojo: Button = findViewById(R.id.rojo)
+        botonRojo.setVisibility(View.GONE)
+        val botonVerde: Button = findViewById(R.id.verde)
+        botonVerde.setVisibility(View.GONE)
+        val botonAmarillo: Button = findViewById(R.id.amarillo)
+        botonAmarillo.setVisibility(View.GONE)
+        val botonAzul: Button = findViewById(R.id.azul)
+        botonAzul.setVisibility(View.GONE)
+        val premio: ImageView = findViewById(R.id.indice)
         premio.setVisibility(VISIBLE)
         delay(8000L)
         botonAzul.setVisibility(View.VISIBLE)
